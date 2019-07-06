@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Preferred Shops{% endblock %}
+
+{% block body %}
+	<div>
+		<nav class="navbar navbar-light navbar-expand-md navigation-clean">
+	    <div class="container"><a href="#" class="navbar-brand" style="font-family:&#39;Allerta Stencil&#39;, sans-serif;"><span class="coding"><em>Coding </em></span><span><em>Challenge</em></span></a><button data-toggle="collapse" data-target="#navcol-1" class="navbar-toggler"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+	        <div
+	            class="collapse navbar-collapse" id="navcol-1">
+	            <ul class="nav navbar-nav ml-auto">
+	                <li role="presentation" class="nav-item"><a href="{{path('nearby')}}" class="nav-link">Nearby Shops<br /></a></li>
+	                <li role="presentation" class="nav-item"><a href="#" class="nav-link active"><strong>My preferred Shops</strong><br /></a></li>
+	            </ul>
+	    </div>
+	    </div>
+		</nav>
+	</div>
+    <div>
+        <div class="container"><div class="row">
+	    <div class="pt-4 col-md-3 text-center"><span class="head-item">name</span><img src="assets/img/31C3745F-8701-4D52-A15A-130F258636E0 (6).jpeg" />
+	        <div class="pt-2 btn-group"><button class="btn btn-danger" type="button" style="  margin:0px 2%;
+	">Dislike</button><button class="btn btn-success" type="button">Like</button></div>
+	    </div>
+	</div></div>
+	</div>
+{% endblock %}
