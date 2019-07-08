@@ -4,8 +4,13 @@
 
 {% block body %}
 	<div class="login-clean">
-	        <form method="post">
-	            <h2 class="sr-only">Login Form</h2>
+	        <form method="post" action="signup-error">
+	            <h2 class="sr-only">Register Form</h2>
+	            {% if echec is defined %}
+	        		<div class="alert alert-danger text-center" role="alert">
+				 		 This email already exists !
+					</div>
+	        	{% endif %}
 	            <div class="illustration"><i class="icon ion-person-add"></i></div>
 	            <div class="form-group"><input type="text" name="name" placeholder="Full name" class="form-control" required /></div>
 	            <div class="form-group"><input type="email" name="email" placeholder="Email" class="form-control" required/></div>

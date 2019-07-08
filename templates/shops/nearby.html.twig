@@ -11,17 +11,53 @@
 	                <ul class="nav navbar-nav ml-auto">
 	                    <li class="nav-item"><a href="#" class="nav-link active"><strong>Nearby Shops</strong><br /></a></li>
 	                    <li class="nav-item"><a href="{{path('preferred')}}" class="nav-link">My preferred Shops<br /></a></li>
+	                    <li class="nav-item"><a href="{{path('logout')}}" class="btn btn-danger">Logout<br /></a></li>
 	                </ul>
 	        </div>
 		</div>
 		</nav>
 	</div>
     <div>
-        <div class="container"><div class="row">
-    <div class="pt-4 col-md-3 text-center"><span class="head-item">name</span><img src="assets/img/31C3745F-8701-4D52-A15A-130F258636E0 (6).jpeg" />
-        <div class="pt-2 btn-group"><button class="btn btn-danger" type="button" style="  margin:0px 2%;
-	">Dislike</button><button class="btn btn-success" type="button">Like</button></div>
-	    </div>
-	</div>
-	</div>
+        <div class="container">
+        	<div class="row">
+        		{% set continue = false %}
+        		{% for item in product %}
+
+        			{% for val in rejected %}
+        				{% if (item.id == val.idProduct) and ("now"|date('d/m/Y H:m:s') < val.rejectedDate|date('d/m/Y H:m:s')) %}
+        					{% set continue = true %}
+        				{% endif %}
+		        			
+        			{% endfor %}
+
+        			{% if not continue %}
+				        <div class="pt-4 col-md-3 text-center">
+			   			 	<span class="head-item">{{item.name}}</span>
+			   			 	<img src="{{item.src}}" />
+				        	<div class="pt-2 btn-group">
+				        		<div class="row text-center">
+				        			<div class="col-md-4">
+				        				<a class="btn btn-danger" href="/rejected/{{item.id}}">Dislike</a>
+				        			</div>
+
+				        			<div class="p-2 l-20 col-md-4">
+				        				<span class="head-item">{{item.price}} $</span>
+				        			</div>
+
+				        			<div class="col-md-4">
+				        				<a class="btn btn-success" href="/preferred/add/{{item.id}}" >Like</a>
+				        			</div>
+				        		</div>
+				        	</div>
+					    </div>
+				    {% endif %}
+
+				    {% if continue %}
+				        {% set continue = false %}
+				    {% endif %}
+
+        		{% endfor %}
+	   			 
+			</div>
+		</div>
 {% endblock %}
