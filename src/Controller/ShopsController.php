@@ -5,6 +5,7 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Session\Session;
+use Symfony\Component\HttpFoundation\Request;
 use App\Entity\Product;
 use App\Entity\Preferred;
 use App\Entity\Rejected;
@@ -26,6 +27,38 @@ class ShopsController extends AbstractController
             return $this->redirectToRoute('signin');
         }   
         
+    }
+
+    /**
+     * @Route("/sortbydistance", name="sortbydistance", methods={"GET","HEAD","POST"})
+     */
+    public function sort_by_distance(Request $request)
+    {
+    	$session = new Session();
+        if ($session->get('name')) {
+        	$lat = $request->get('lat');
+    		$lng = $request->get('lng');
+			$product = $this->getDoctrine()->getRepository(Product::class)->findBy(array());
+			$nearby = array();
+			foreach ($product as $item) {
+				
+				$distance = pow($item->getLat()-$lat, 2) + pow($item->getLat()+$lat, 2);
+				$item->setDistance($distance);
+				array_push($nearby, $item);
+			}
+
+			foreach ($nearby as $key => $row) {
+			    $dist[$key]  = $row->getDistance();
+			}
+
+			array_multisort($dist, SORT_DESC, $nearby);
+
+            $rejected = $this->getDoctrine()->getRepository(Rejected::class)->findBy(array('id_user' => $session->get('id')));
+
+            return $this->render('shops/nearby.html.twig', array('product' => $nearby, 'rejected' => $rejected));
+        } else {
+            return $this->redirectToRoute('signin');
+        } 
     }
 
     /**

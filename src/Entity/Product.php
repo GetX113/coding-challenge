@@ -41,6 +41,16 @@ class Product
      */
     private $lng;
 
+    /**
+     * @ORM\Column(type="float", nullable=true)
+     */
+    private $distance;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $city;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -102,6 +112,30 @@ class Product
     public function setLng(float $lng): self
     {
         $this->lng = $lng;
+
+        return $this;
+    }
+
+    public function getDistance(): ?float
+    {
+        return $this->distance;
+    }
+
+    public function setDistance(?float $distance): self
+    {
+        $this->distance = $distance;
+
+        return $this;
+    }
+
+    public function getCity(): ?string
+    {
+        return $this->city;
+    }
+
+    public function setCity(?string $city): self
+    {
+        $this->city = $city;
 
         return $this;
     }

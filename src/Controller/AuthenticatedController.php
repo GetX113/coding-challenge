@@ -10,15 +10,17 @@ use App\Entity\Users;
 
 class AuthenticatedController extends AbstractController
 {
-	 /**
+	/**
      * @Route("/signin", name="signin")
      */
     public function signin()
     {
+
 		return $this->render('authenticated/signin.html.twig');
     }
 
-	 /**
+
+	/**
      * @Route("/signup", name="signup")
      */
     public function signup()

@@ -19,6 +19,11 @@
 	</div>
     <div>
         <div class="container">
+        	<a id = "sortbydistance" href = "#">Sort By Distance</a>
+        <form method="post" action="sortbydistance" id="position">
+        	<input type="hidden" name="lat" id="lat" value="">
+            <input type="hidden" name="lng" id="lng" value="">
+        </form>
         	<div class="row">
         		{% set continue = false %}
         		{% for item in product %}
